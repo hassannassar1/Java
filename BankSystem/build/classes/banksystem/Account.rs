@@ -1,3 +1,0 @@
-banksystem.Saving
-banksystem.Account
-banksystem.Investment
