@@ -21,6 +21,7 @@ public class Pyramids {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
         PyramidsCSVDAO dao = new PyramidsCSVDAO();
         List <Pyramid> pyramids= dao.readPyramidsFromCSV("pyramids.csv");
         Map<String,Integer> pm = new HashMap<>() ;
