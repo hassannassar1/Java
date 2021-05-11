@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -22,23 +23,16 @@ public class Pyramids {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
         // TODO code application logic here
-        BufferedReader br; 
-        br = new BufferedReader(new FileReader("pyramids.csv"));
-        String line = br.readLine();
-        if (line != null){
-            System.out.println(line);
+        PyramidsCSVDAO dao = new PyramidsCSVDAO();
+        List <Pyramid> pyramids= dao.readPyramidsFromCSV("pyramids.csv");
+        int i = 0;
+        for (Pyramid p : pyramids){
+            System.out.println("#"+(i++)+p);
         }
-        do
-        {
-            line = br.readLine();
-            if (line != null){
-            String [] attributes = line.split(",");
-            for (String attr:attributes){
-                System.out.print(attr+" ");
-            }System.out.println(" ");
-        }
-            
-        }while(line!=null);
+       // pyramids.sort(height);
     }
+    
+    
+    
     
 }
