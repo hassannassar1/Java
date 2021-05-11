@@ -32,8 +32,17 @@ public class PyramidsCSVDAO {
                 line = br.readLine();
                 if (line != null){
                 String [] attributes = line.split(",");
-                String []meta= {attributes[7],attributes[0],attributes[4],attributes[2]};
+                
+                if (attributes[7].isBlank()){
+                mean = (mean+py.getHeight())/i;
+                String []meta= {String.valueOf(mean),attributes[0],attributes[4],attributes[2]};
                 py = createPyramid(meta);
+                }
+                else{
+                    String []meta= {attributes[7],attributes[0],attributes[4],attributes[2]};
+                    py = createPyramid(meta);
+                    i++;}
+                
                 pyramids.add(py);}
             }while(line!=null);}
         

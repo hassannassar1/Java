@@ -51,6 +51,7 @@ public class Pyramid {
     
 }
 class Sortbyheight implements Comparator<Pyramid> {
+    @Override
     public int compare(Pyramid p1, Pyramid p2)
     {
         return (int)(p1.getHeight() - p2.getHeight());
