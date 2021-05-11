@@ -7,6 +7,7 @@ package pyramids;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -17,17 +18,18 @@ import java.util.List;
  * @author hassan
  */
 public class PyramidsCSVDAO {
-    private List<Pyramid> pyramids;
+    private final List<Pyramid> pyramids;
     private Pyramid py;
-    private List<List<String>> Lines = new LinkedList<>();
+    private final List<List<String>> Lines;
     
     public PyramidsCSVDAO (){
         pyramids = new ArrayList<>();
+        Lines = new LinkedList<>();
     }
     
     public List<Pyramid> readPyramidsFromCSV (String fileName){
         List<List<String>> thepyramids = ReadCSVFile(fileName);
-        for (List<String> pyramid:thepyramids){
+        thepyramids.stream().map(pyramid -> {
             if (pyramid.get(7).isBlank()){
                 String []meta= {String.valueOf(py.getHeight()),pyramid.get(0),pyramid.get(4),pyramid.get(2)};
                 py = createPyramid(meta);
@@ -35,9 +37,10 @@ public class PyramidsCSVDAO {
             else{
                 String []meta= {pyramid.get(7),pyramid.get(0),pyramid.get(4),pyramid.get(2)};
                 py = createPyramid(meta);}
-            
+            return pyramid;            
+        }).forEachOrdered(_item -> {
             pyramids.add(py);
-        }
+        });
         return pyramids;   
     }
  
@@ -47,22 +50,21 @@ public class PyramidsCSVDAO {
     }
      public List<List<String>> ReadCSVFile(String fileName) {
         try {
-            Thread thread = new Thread(() -> {
+            Thread thread;
+            thread = new Thread(() -> {
                 try {
-
                     BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
                     String line = bufferedReader.readLine();
                     while ((line = bufferedReader.readLine()) != null) {
-                        this.Lines.add(Arrays.asList(line.split(",")));
+                        PyramidsCSVDAO.this.Lines.add(Arrays.asList(line.split(",")));
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                }catch (IOException e) {
+                    System.out.println(e);
                 }
             });
             thread.start();
             thread.join();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (InterruptedException e) {System.out.println(e);
         }
         return this.Lines;
     }
