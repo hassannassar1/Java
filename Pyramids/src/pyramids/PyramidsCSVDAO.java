@@ -7,6 +7,7 @@ package pyramids;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +22,8 @@ public class PyramidsCSVDAO {
     public PyramidsCSVDAO (){
         pyramids = new ArrayList<Pyramid>();
     }
+    
     public List<Pyramid> readPyramidsFromCSV (String fileName){
-        int i=1;
-        double mean=0;
         try{
             BufferedReader br; 
             br = new BufferedReader(new FileReader(fileName));
@@ -34,19 +34,17 @@ public class PyramidsCSVDAO {
                 String [] attributes = line.split(",");
                 
                 if (attributes[7].isBlank()){
-                mean = (mean+py.getHeight())/i;
-                String []meta= {String.valueOf(mean),attributes[0],attributes[4],attributes[2]};
+                String []meta= {String.valueOf(py.getHeight()),attributes[0],attributes[4],attributes[2]};
                 py = createPyramid(meta);
                 }
                 else{
                     String []meta= {attributes[7],attributes[0],attributes[4],attributes[2]};
-                    py = createPyramid(meta);
-                    i++;}
+                    py = createPyramid(meta);}
                 
                 pyramids.add(py);}
             }while(line!=null);}
         
-             catch(Exception e){
+             catch(IOException e){
                  System.out.println(e);
             }
              return pyramids;    
