@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class PyramidsCSVDAO {
     private List<Pyramid> pyramids;
-    Pyramid py;
+    private Pyramid py;
     
     public PyramidsCSVDAO (){
         pyramids = new ArrayList<Pyramid>();
@@ -25,34 +25,28 @@ public class PyramidsCSVDAO {
         int i=1;
         double mean=0;
         try{
-            BufferedReader br = new Thread(){public void run(){
-            new BufferedReader(new FileReader(fileName));}}.start();
-            
-           // br = 
+            BufferedReader br; 
+            br = new BufferedReader(new FileReader(fileName));
             String line = br.readLine();
-             
             do{
                 line = br.readLine();
                 if (line != null){
                 String [] attributes = line.split(",");
-                if (attributes[7]==null){
-                    attributes[7] = String.valueOf(mean);//String.valueOf(py.getHeight());
-            }
-                py = new Pyramid(Double.parseDouble(attributes[7]),attributes[0],attributes[4],attributes[2]);
-                pyramids.add(py);
-                i++;
-                mean = (mean+py.getHeight())/i;
-             }
-            
-             }while(line!=null);
-                
-        }catch(Exception e){
+                String []meta= {attributes[7],attributes[0],attributes[4],attributes[2]};
+                py = createPyramid(meta);
+                pyramids.add(py);}
+            }while(line!=null);}
         
+             catch(Exception e){
+                 System.out.println(e);
             }
-    return pyramids; 
-    }
-    /*public Pyramid createPyramid(String []meta){
-        return new Pyramid(meta)
-    } */
+             return pyramids;    
+        }
     
-}
+     public Pyramid createPyramid(String []meta){
+        
+        return new Pyramid(Double.parseDouble(meta[0]),meta[1],meta[2],meta[3]);
+    } 
+    
+    }
+

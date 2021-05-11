@@ -8,8 +8,7 @@ package pyramids;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.IOException;
 
 /**
  *
@@ -20,17 +19,30 @@ public class ReadThread extends Thread{
     public ReadThread(String file){
         this.file = file;
     }
-    @Override
-    public void run(){
-        BufferedReader br; 
-        try {
-            br = new BufferedReader(new FileReader("pyramids.csv"));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ReadThread.class.getName()).log(Level.SEVERE, null, ex);
+   
+  @Override
+  public void run() {
+    BufferedReader br = null;
+     try {
+            br = new BufferedReader(new FileReader(this.file));
+            String buffer =null;
+            while((buffer=br.readLine())!=null){
+                
+            }
+
+        }catch (IOException e) {
+                e.printStackTrace();
+            }
+        finally{
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-            
-    }
-    
+
+
+  }
 }
 
     

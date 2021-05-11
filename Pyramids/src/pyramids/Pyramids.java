@@ -10,7 +10,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -25,11 +28,19 @@ public class Pyramids {
         // TODO code application logic here
         PyramidsCSVDAO dao = new PyramidsCSVDAO();
         List <Pyramid> pyramids= dao.readPyramidsFromCSV("pyramids.csv");
+        Map<String,Integer> pm = new HashMap<>() ;
         int i = 0;
         for (Pyramid p : pyramids){
-            System.out.println("#"+(i++)+p);
+            System.out.println("#"+p.getModern_name());
+            pm.putIfAbsent(p.getSite(), 1);
+            pm.put(p.getSite(),pm.get(p.getSite()) + 1);
         }
-       // pyramids.sort(height);
+       Collections.sort(pyramids, new Sortbyheight());
+       System.out.println("\nSorted by Height");
+        for (Pyramid p:pyramids)
+            System.out.println(p.getModern_name()+"   "+p.getHeight());
+       pm.forEach((k, v) -> System.out.println("The Number of pyramids in " + k + " is : " + v));
+      
     }
     
     

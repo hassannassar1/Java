@@ -5,6 +5,8 @@
  */
 package pyramids;
 
+import java.util.Comparator;
+
 /**
  *
  * @author hassan
@@ -25,7 +27,7 @@ public class Pyramid {
    public double getHeight(){
        return this.height;
    }
-   public String getModern_ame(){
+   public String getModern_name(){
        return this.modern_name;
    }
    public String getPharaoh(){
@@ -37,7 +39,7 @@ public class Pyramid {
    public void setHeight(double height){
        this.height=height;
    }
-   public void setModern_ame(String modern_name){
+   public void setModern_name(String modern_name){
        this.modern_name=modern_name;
    }
    public void setPharaoh(String pharaoh){
@@ -47,4 +49,10 @@ public class Pyramid {
        this.site=site;
    }
     
+}
+class Sortbyheight implements Comparator<Pyramid> {
+    public int compare(Pyramid p1, Pyramid p2)
+    {
+        return (int)(p1.getHeight() - p2.getHeight());
+    }
 }
