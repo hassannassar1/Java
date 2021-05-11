@@ -5,11 +5,6 @@
  */
 package pyramids;
 
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -26,35 +21,22 @@ public class Pyramids {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        /*try{
-            BufferedReader br; 
-            br = new BufferedReader(new FileReader("pyramids.csv"));
-            String line = br.readLine();
-            do{
-                line = br.readLine();
-                if (line != null){
-                String [] attributes = line.split(",");
-                System.out.println("height  "+attributes[7].equals(null));
-                
-            }}while(line!=null);
-            }
-             catch(Exception e){
-                 System.out.println(e);
-            }
-       */
         PyramidsCSVDAO dao = new PyramidsCSVDAO();
         List <Pyramid> pyramids= dao.readPyramidsFromCSV("pyramids.csv");
         Map<String,Integer> pm = new HashMap<>() ;
+        int i = 1;
         for (Pyramid p : pyramids){
-            System.out.println("#"+p.getModern_name());
+            System.out.println("#"+(i++)+"-"+p.getModern_name()+"-------"+p.getPharaoh());
             pm.putIfAbsent(p.getSite(), 1);
             pm.put(p.getSite(),pm.get(p.getSite()) + 1);
         }
-        System.out.println();
+       System.out.println();
        Collections.sort(pyramids, new Sortbyheight());
-       System.out.println("\nSorted by Height");
+       System.out.println("\n-------Sorted by Height----------");
+       System.out.println("\nNum Height       Name     ");
+       i=1;
         for (Pyramid p:pyramids)
-            System.out.println(p.getModern_name()+"   "+p.getHeight());
+            System.out.println("#"+(i++)+"   "+p.getHeight()+"  "+p.getModern_name());
         System.out.println();
        pm.forEach((k, v) -> System.out.println("The Number of pyramids in " + k + " is : " + v));
       

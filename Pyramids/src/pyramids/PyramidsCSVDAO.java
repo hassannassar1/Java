@@ -20,7 +20,7 @@ public class PyramidsCSVDAO {
     private Pyramid py;
     
     public PyramidsCSVDAO (){
-        pyramids = new ArrayList<Pyramid>();
+        pyramids = new ArrayList<>();
     }
     
     public List<Pyramid> readPyramidsFromCSV (String fileName){
@@ -41,13 +41,14 @@ public class PyramidsCSVDAO {
                     String []meta= {attributes[7],attributes[0],attributes[4],attributes[2]};
                     py = createPyramid(meta);}
                 
-                pyramids.add(py);}
+                pyramids.add(py);
+                }
             }while(line!=null);}
         
              catch(IOException e){
                  System.out.println(e);
-            }
-             return pyramids;    
+            } 
+             return pyramids;   
         }
     
      public Pyramid createPyramid(String []meta){
