@@ -29,5 +29,11 @@ public class Country {
         this.gnp = gnp;
         this.capital = capital;
     }
+    public int get_population(){
+        return this.population;
+    }
+    public int get_capital(){
+       return this.capital;
+    }
     
 }

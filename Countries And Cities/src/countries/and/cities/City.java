@@ -13,7 +13,7 @@ public class City {
     
     private int id;
     private String name;
-    private int population;
+    final private int population;
     private String countryCode;
     
     City( int id ,String name, int population, String countryCode)
@@ -23,11 +23,19 @@ public class City {
         this.population = population;
         this.countryCode = countryCode;
     }
+    public int get_id(){
+     return this.id;
+    }
     public String get_name(){
         return this.name;
     }
     public String get_countryCode(){
         return this.countryCode;
     }
+    public int get_population(){
+     return this.population;
+    }
+    
+    
     
 }

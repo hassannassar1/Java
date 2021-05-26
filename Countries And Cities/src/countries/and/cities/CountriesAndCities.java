@@ -6,13 +6,11 @@
 package countries.and.cities;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import static java.util.Map.Entry.comparingByValue;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -43,13 +41,25 @@ public class CountriesAndCities {
             {
                 map.get(s).add(c.get_name());
             }
-
         });
-        
-            System.out.println(map.get("AFG"));
+            Scanner sc = new Scanner(System.in);
+            String code = sc.next();
+            System.out.println(map.get(code));
+            
+  List <String> order = map.get(code).stream().sorted().collect(Collectors.toList());
+            
+            List<Integer> pop_list = new ArrayList<Integer>();
+            countries.forEach(c -> {
+            //System.out.println(c.get_population());
+            pop_list.add(c.get_population());
+        });
+            System.out.println("Average "+countries.stream().mapToInt(Country::get_population).average());
+            System.out.println("Max "+countries.stream().mapToInt(Country::get_population).max());
+            
+            
            
-            System.out.println(map.get("AFG").stream().sorted().collect(Collectors.toList()));
-
+           
+            System.out.println(cities.get(1).get_population());
         
     }
     
