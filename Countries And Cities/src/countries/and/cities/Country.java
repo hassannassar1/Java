@@ -35,5 +35,8 @@ public class Country {
     public int get_capital(){
        return this.capital;
     }
+    public String get_code(){
+       return this.code;
+    }
     
 }

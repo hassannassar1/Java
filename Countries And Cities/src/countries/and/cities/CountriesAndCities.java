@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -30,37 +31,69 @@ public class CountriesAndCities {
         CountryCSVDAO countrydao = new CountryCSVDAO();
         List <Country> countries= countrydao.readCountriesFromCSV("Countries.csv");
         
-        Map<String,List<String>> map = new HashMap<>() ;
+        Map<String,List<City>> map = new HashMap<>() ;
+      
+        
         cities.forEach(c -> {
+            
             String s = c.get_countryCode();
             if (map.get(s) == null) {
-                map.put(s, new ArrayList<String>());
-                map.get(s).add(c.get_name());
+                map.put(s, new ArrayList<City>());
+                map.get(s).add(c);
             }
             else
             {
-                map.get(s).add(c.get_name());
+                map.get(s).add(c);
             }
         });
-            Scanner sc = new Scanner(System.in);
-            String code = sc.next();
-            System.out.println(map.get(code));
-            
-  List <String> order = map.get(code).stream().sorted().collect(Collectors.toList());
-            
-            List<Integer> pop_list = new ArrayList<Integer>();
-            countries.forEach(c -> {
-            //System.out.println(c.get_population());
-            pop_list.add(c.get_population());
-        });
-            System.out.println("Average "+countries.stream().mapToInt(Country::get_population).average());
-            System.out.println("Max "+countries.stream().mapToInt(Country::get_population).max());
-            
-            
-           
-           
-            System.out.println(cities.get(1).get_population());
         
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Country Code : ");
+        String code = sc.next();
+        map.get(code).forEach(c->System.out.print(c.get_name()+"  "));
+        System.out.println();
+        List <City> order = map.get(code).stream().sorted(Comparator.comparingInt(City::get_population
+                                            )).collect(Collectors.toList());
+        
+        order.forEach(c->System.out.print(c.get_name()+"  "));
+        System.out.println();
+        
+        
+        
+        
+        
+        List<Integer> pop_list = new ArrayList<Integer>();
+        countries.forEach(c -> {
+        pop_list.add(c.get_population());
+    });
+        
+        
+        System.out.println("Average "+countries.stream().mapToInt(Country::get_population).average());
+        System.out.println();
+        System.out.println("Max "+countries.stream().mapToInt(Country::get_population).max());
+        
+        
+        
+        countries.forEach(c->{
+            try{
+            City o;
+            List <City> p = map.get(c.get_code()).stream().collect(Collectors.toList());
+            o = p.stream().max(Comparator.comparing(City::get_population)).get();
+            System.out.println(o.get_name()+" "+o.get_population()+" "+o.get_countryCode());
+                    
+            }
+            catch (Exception e){
+            System.out.println(e);
+            }
+            
+        });
+        
+        List<Integer> capitalId = countries.stream().
+        map(Country::get_capital).collect(Collectors.toList());
+        final Optional<City> max = cities.stream().filter(c->capitalId.contains(c.get_id())).max(Comparator.comparingInt(City::get_population));
+        System.out.println("max = " + max);
+
     }
+
     
 }

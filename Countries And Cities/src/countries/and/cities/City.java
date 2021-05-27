@@ -35,6 +35,11 @@ public class City {
     public int get_population(){
      return this.population;
     }
+
+    @Override
+    public String toString() {
+        return this.name + ", " + this.population + ", " + this.countryCode;
+    }
     
     
     
