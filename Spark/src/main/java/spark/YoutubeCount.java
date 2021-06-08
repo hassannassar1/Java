@@ -66,13 +66,9 @@ public class YoutubeCount {
         JavaRDD<String> tags = videos
                 .map (YoutubeCount::extractTag)
                 .filter (StringUtils::isNotBlank);
-        
        // JavaRDD<String>
         JavaRDD<String> words = tags.flatMap (tag -> Arrays.asList (tag
-                .toLowerCase ()
-                .trim ()
-                .replaceAll ("\\p{Punct}", " ")
-               .split (" ")).iterator ());
+                .split ("\"\"\\|\"\"")).iterator ());
         System.out.println("*****************************************" + words.toString ());
         
         // COUNTING
@@ -88,8 +84,7 @@ public class YoutubeCount {
     
     private static String extractTag(String videoLine) {
         try {
-             String str =  videoLine.split (COMMA_DELIMITER)[6];
-             return  str.split(COMMA_DELIMITER)[0];
+             return videoLine.split (COMMA_DELIMITER)[6];
         } catch (Exception e) {
             return "";
         }
