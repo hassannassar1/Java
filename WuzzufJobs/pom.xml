@@ -17,6 +17,11 @@
             <version>3.1.1</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-mllib_2.12</artifactId>
+            <version>3.1.1</version>
+        </dependency>
 
 	<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs -->
 	<dependency>
@@ -40,6 +45,23 @@
             <artifactId>xchart</artifactId>
             <version>3.8.0</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.0.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-core</artifactId>
+            <version>1.9</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>
+            <version>1.18.2</version>
         </dependency>
     </dependencies>
     <packaging>jar</packaging>

@@ -11,14 +11,14 @@ package wuzzufjobs;
  */
 public class Job {
     
-    private String title;
-    private String company;
-    private String location;
-    private String type;
-    private String level;
-    private String expYears;
-    private String country;
-    private String skills;
+    String title;
+    String company;
+    String location;
+    String type;
+    String level;
+    String expYears;
+    String country;
+    String skills;
     
     Job(String title, String company, String location,
         String type, String level, String expYears, 
