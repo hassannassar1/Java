@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <display-name>JobManagement</display-name>
+    
+    <listener>
+        <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+    </listener>
+    
+    <servlet>
+        <servlet-name>Services</servlet-name>
+        <servlet-class>JobServices.JobServices</servlet-class>
+    </servlet>  
+    <servlet-mapping>
+        <servlet-name>Services</servlet-name>
+        <url-pattern>/jobs</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>PopularTitles</servlet-name>
+        <servlet-class>JobServices.PopularTitles</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PopularTitles</servlet-name>
+        <url-pattern>/titles</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>PopularAreas</servlet-name>
+        <servlet-class>JobServices.PopularAreas</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PopularAreas</servlet-name>
+        <url-pattern>/areas</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>PopularCompanies</servlet-name>
+        <servlet-class>JobServices.PopularCompanies</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PopularCompanies</servlet-name>
+        <url-pattern>/companies</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SkillsCount</servlet-name>
+        <servlet-class>JobServices.SkillsCount</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SkillsCount</servlet-name>
+        <url-pattern>/skills</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GraphTitles</servlet-name>
+        <servlet-class>JobServices.GraphTitles</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GraphTitles</servlet-name>
+        <url-pattern>/titlesgraph</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GraphAreas</servlet-name>
+        <servlet-class>JobServices.GraphAreas</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GraphAreas</servlet-name>
+        <url-pattern>/areasgraph</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GraphCompanies</servlet-name>
+        <servlet-class>JobServices.GraphCompanies</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GraphCompanies</servlet-name>
+        <url-pattern>/companiesgraph</url-pattern>
+    </servlet-mapping>
+       
+</web-app>
+<!-- 
+
+<init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>com.company</param-value>
+        </init-param>-->

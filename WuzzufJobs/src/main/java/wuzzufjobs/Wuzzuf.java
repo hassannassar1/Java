@@ -36,6 +36,7 @@ public class Wuzzuf
         Graph.barPlot(PAreas, "Top Five Popular Locations", "Names", "Number of Jobs");
         Graph.piePlot(PCompanies, "Top Five Hiring Companies");
         
+        
     }
     
 }

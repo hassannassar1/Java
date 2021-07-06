@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package wuzzufjobs;
+package JobServices;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class JobDAO {
     JobDAO(){
     }
     
-    public Dataset<Row>  read(String CSVFile){
+    public List<Job> read(String CSVFile){
         SparkConf conf = new SparkConf ().setAppName ("Wuzzuf Jobs")
                         .setMaster("local[*]")
                         .set("com.couchbase.bucket.default", "");
@@ -32,8 +32,12 @@ public class JobDAO {
             .format("com.databricks.spark.csv")
             .option("inferSchema", "true")
             .option("header", "true").load(CSVFile);
+        Dataset<Row> df1 = Pandas.clean(df);
+        Pandas pd = new Pandas();
+        List<Job> jobs = pd.convertToList(df1);
+        javaSparkContext.close();
         
-        return this.df;
+        return jobs;
     }
     
     
@@ -48,6 +52,5 @@ public class JobDAO {
         System.out.println ("Training Data Set Size is : " + dfTrain.count ());
         System.out.println ("Test Data Set Size is     : " +dfTest.count ());
         return r;
-    }
-    
+    } 
 }

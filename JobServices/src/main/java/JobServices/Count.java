@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package wuzzufjobs;
+package JobServices;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,6 @@ public class Count {
     
     
     public static List<Map.Entry> popularTitles(List<Job> jobs){
-        
         List<String> titles = jobs.stream()
                          .map (Job::getTitle)
                          .collect(Collectors.toList());
@@ -34,7 +34,7 @@ public class Count {
         
         List<Map.Entry> sorted = hm.entrySet ()
                 .stream ()
-                .sorted (Map.Entry.comparingByValue ())
+                .sorted (Map.Entry.comparingByValue (Comparator.reverseOrder()))
                 .collect (Collectors.toList ());
         
         sorted.forEach(entry -> {
@@ -59,13 +59,12 @@ public class Count {
         
         List<Map.Entry> sorted = hm.entrySet ()
                 .stream ()
-                .sorted (Map.Entry.comparingByValue ())
+                .sorted (Map.Entry.comparingByValue (Comparator.reverseOrder()))
                 .collect (Collectors.toList ());
         
         sorted.forEach(entry -> {
             System.out.println (entry.getKey () + " : " + entry.getValue ());
         });
-        
         return sorted;
         
     }
@@ -85,7 +84,7 @@ public class Count {
         
         List<Map.Entry> sorted = hm.entrySet ()
                 .stream ()
-                .sorted (Map.Entry.comparingByValue ())
+                .sorted (Map.Entry.comparingByValue (Comparator.reverseOrder()))
                 .collect (Collectors.toList ());
         
         sorted.forEach(entry -> {
@@ -120,7 +119,7 @@ public class Count {
         
         List<Map.Entry> sorted = hm.entrySet ()
                 .stream ()
-                .sorted (Map.Entry.comparingByValue ())
+                .sorted (Map.Entry.comparingByValue (Comparator.reverseOrder()))
                 .collect (Collectors.toList ());
         
         sorted.forEach(entry -> {

@@ -3,18 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package wuzzufjobs;
+package JobServices;
 
 import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
  *
  * @author hassan
  */
-@XmlRootElement(name="job")
+@XmlRootElement(name= "job" )
+@XmlType(propOrder = {"title", "company", "location", "type", "level","expYear","country","skills"})
 public class Job implements Serializable {
     
     String title;
@@ -39,6 +42,7 @@ public class Job implements Serializable {
         this.country = country;
         this.skills = skills;
     }
+    
     
     @XmlElement
     public String getTitle(){
@@ -80,6 +84,5 @@ public class Job implements Serializable {
     }
     
     
-
-
+    
 }
